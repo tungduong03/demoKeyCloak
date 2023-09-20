@@ -1,0 +1,40 @@
+server:
+  port: 8082
+
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: quan_ly
+            client-secret: L2bB7l3inrJmmK8CBYzmgf8h08pYbBxX
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:8082/login/oauth2/code/keycloak"
+
+        provider:
+          keycloak:
+            #authorization-uri: http://localhost:8000/realms/test (cái này sai)
+            issuer-uri: http://localhost:8000/realms/test
+            token-uri: http://localhost:8000/realms/test/protocol/openid-connect/token
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8000/realms/test
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+
+jwt:
+  auth:
+    converter:
+      principle-attribute: preferred_username
+      resource-id: quan_ly
+
+#spring.security.oauth2.client.registration.keycloak.client-secret=jdeTitPc7onHamcFHjTVec6ySV4ZEG54
+#spring.security.oauth2.client.registration.keycloak.scope=openid
+#spring.security.oauth2.client.registration.keycloak.authorization-grant-type=authorization_code
+#spring.security.oauth2.client.registration.keycloak.redirect-uri=http://localhost:8082/welcome
+#spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8000/realms/test
+
+#spring.security.o
